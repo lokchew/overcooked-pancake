@@ -53,7 +53,7 @@
 
         <section id="admin-right-panel">
             <div id="admin-main-function">
-                <button id="add-product-btn">Add new item</button>
+                <button id="add-product-btn" onclick="openProductForm()">Add new item</button>
                 <button id="remove-product-btn">Remove items</button>
                 <button id="download-file-btn">Download file</button>
             </div>
@@ -89,7 +89,7 @@
         </section>
 
         <section id="admin-product-form">
-            <form id="movie-form" autocomplete="off">
+            <form id="input-form-container" autocomplete="off">
                 <!-- Using appropriate tag that is semantically appropriate https://stackoverflow.com/questions/27103853/section-inside-a-form -->
                 <fieldset id="input-form">
                     <div id="product-details">
@@ -116,32 +116,15 @@
 
                     <div class="product-detail-contaienr">
                         <label class="product-img-upload" for="product-img">Media<br><span><p>+</p></span></label>
-                        <input class="product-img-upload" type="file" multiple="multiple" accept="image/*" id="product-img" name="product-title" required=""></input>
+                        <input class="product-img-upload" type="file" multiple="multiple" accept="image/*" id="product-img" name="product-img" required=""></input>
                         <div id="product-img-preview">
-                            <div>
-                                <div class="img-preview-container">
-                                    <span>x</span>
-                                    <img src="../image/landing/bg.JPG">
-                                </div>
-                                <div class="img-preview-container">
-                                    <span>x</span>
-                                    <img src="../image/landing/bg.JPG">
-                                </div>
-                                <div class="img-preview-container">
-                                    <span>x</span>
-                                    <img src="../image/landing/bg.JPG">
-                                </div>
-                                <div class="img-preview-container">
-                                    <span>x</span>
-                                    <img src="../image/landing/bg.JPG">
-                                </div>
-                            </div>
+                            <div></div>
                         </div>
                     </div>
                 </fieldset>
 
                 <div id="form-btn-list">
-                    <input type="button" name="back_btn" value="Back"/>
+                    <input type="button" name="back_btn" value="Back" onclick="closeProductForm()"/>
                     <input type="submit" name="update_btn" value="Update"/>
                 </div>
             </form>
