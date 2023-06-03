@@ -246,6 +246,7 @@ fieldset {
 
 .product-detail-contaienr {
     position: relative;
+    overflow: auto;
 }
 
 .product-detail-contaienr > label {
@@ -254,11 +255,12 @@ fieldset {
 }
 
 #product-details > div > input {
-    height: 2em;
+    height: 2.5em;
     width: 100%;
 
     font-size: 16px;
     padding-left: 10px;
+    box-sizing: border-box;
 }
 
 label.product-img-upload > span {
@@ -289,15 +291,13 @@ input.product-img-upload {
 
 #product-img-preview {
     display: inline-block;
-    width: 87.5%;
+    width: 730px;
     height: 100px;
     margin-left: 120px;
 }
 
 #product-img-preview > div {
     position: relative;
-    height: 100%;
-
     display: flex;
     gap: 20px;
 }

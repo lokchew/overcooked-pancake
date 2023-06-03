@@ -54,8 +54,8 @@
         <section id="admin-right-panel">
             <div id="admin-main-function">
                 <button id="add-product-btn" onclick="openProductForm()">Add new item</button>
-                <button id="remove-product-btn">Remove items</button>
-                <button id="download-file-btn">Download file</button>
+                <button id="remove-product-btn" onclick="removeSelected()">Remove items</button>
+                <button id="download-file-btn" onclick="downloadProductsJson()">Download file</button>
             </div>
 
             <span></span>
@@ -67,24 +67,8 @@
                 <a>Last edited &#128317</a>
                 <a>Actions</a>
             </div>
+
             <div id="admin-products-container">
-                <div class="admin-product-container">
-                    <input type="checkbox">
-                    <img src="../image/landing/bg.JPG">
-                    <div class="admin-detail-grid">
-                        <div>
-                            <p class="product-title">Little Dog with Red Hat</p>
-                            <p class="product-id">#052320231640</p>
-                        </div>
-                        <p class="product-description">A little cute dog who loves running</p>
-                        <p class="product-img">4</p>
-                        <p class="product-date">24/5/2023</p>
-                        <div class="product-action">
-                            <a>&#128394 Edit</a>
-                            <a>&#128465 Remove</a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -100,7 +84,7 @@
                         
                         <div class="product-detail-contaienr">
                             <label for="product-type">Type</label><br>
-                            <input type="search" list="type-selection" id="product-type" name="product-type" required="" style="box-sizing:unset;">
+                            <input type="search" list="type-selection" id="product-type" name="product-type" required="">
                             <datalist id="type-selection">
                                 <option value="Clay">
                                 <option value="Punch needle">
@@ -116,7 +100,7 @@
 
                     <div class="product-detail-contaienr">
                         <label class="product-img-upload" for="product-img">Media<br><span><p>+</p></span></label>
-                        <input class="product-img-upload" type="file" multiple="multiple" accept="image/*" id="product-img" name="product-img" required=""></input>
+                        <input class="product-img-upload" type="file" multiple="multiple" accept="image/*" id="product-img" name="product-img"></input>
                         <div id="product-img-preview">
                             <div></div>
                         </div>
