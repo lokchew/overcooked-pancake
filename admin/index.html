@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Admin Page</title>
+	<link rel="stylesheet" href="style.css" type="text/css">
+	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Fjalla One'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://cdn.tiny.cloud/1/nfh7hotg9fe1a4jo22b70j2wan3e88sy6132z4bnauikhenf/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+          selector: '#product-description',
+          resize: false,
+          plugins: [
+            'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
+            'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
+            'powerpaste','fullscreen','formatpainter','insertdatetime','media','table','help','wordcount'
+          ],
+          toolbar: 'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
+            'alignleft aligncenter alignright alignjustify | ' +
+            'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help'
+        });
+    </script>
+</head>
+
+<body>
+	<main>
+        <section id="admin-left-panel"> 
+            <h1>Website Update</h1>
+            <div>
+                <div> 
+                    <p>Products - All</p>
+                    <p>(333)</p>
+                </div>
+                <div> 
+                    <p>Products - Clay</p>
+                    <p>(111)</p>
+                </div>
+                <div> 
+                    <p>Products - Punch needle</p>
+                    <p>(111)</p>
+                </div>
+                <div> 
+                    <p>Products - Resin work</p>
+                    <p>(111)</p>
+                </div>
+            </div>
+            <a href="../index.html">Back to Website</a>
+        </section>
+
+        <section id="admin-right-panel">
+            <div id="admin-main-function">
+                <button id="add-product-btn">Add new item</button>
+                <button id="remove-product-btn">Remove items</button>
+                <button id="download-file-btn">Download file</button>
+            </div>
+
+            <span></span>
+
+            <div id="admin-products-header">
+                <a>Name &#128317</a>
+                <a>Description</a>
+                <a>Images &#128317</a>
+                <a>Last edited &#128317</a>
+                <a>Actions</a>
+            </div>
+            <div id="admin-products-container">
+                <div class="admin-product-container">
+                    <input type="checkbox">
+                    <img src="../image/landing/bg.JPG">
+                    <div class="admin-detail-grid">
+                        <div>
+                            <p class="product-title">Little Dog with Red Hat</p>
+                            <p class="product-id">#052320231640</p>
+                        </div>
+                        <p class="product-description">A little cute dog who loves running</p>
+                        <p class="product-img">4</p>
+                        <p class="product-date">24/5/2023</p>
+                        <div class="product-action">
+                            <a>&#128394 Edit</a>
+                            <a>&#128465 Remove</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="admin-product-form">
+            <form id="movie-form" autocomplete="off">
+                <!-- Using appropriate tag that is semantically appropriate https://stackoverflow.com/questions/27103853/section-inside-a-form -->
+                <fieldset id="input-form">
+                    <div id="product-details">
+                        <div class="product-detail-contaienr">
+                            <label for="product-title">Title</label><br>
+                            <input type="text" id="product-title" name="product-title" required="">
+                        </div>
+                        
+                        <div class="product-detail-contaienr">
+                            <label for="product-type">Type</label><br>
+                            <input type="search" list="type-selection" id="product-type" name="product-type" required="" style="box-sizing:unset;">
+                            <datalist id="type-selection">
+                                <option value="Clay">
+                                <option value="Punch needle">
+                                <option value="Resin work">
+                            </datalist>
+                        </div>
+                    </div>
+
+                    <div class="product-detail-contaienr">
+                        <label for="product-description">Description</label><br>
+                        <textarea id="product-description" name="product-description"></textarea>
+                    </div>
+
+                    <div class="product-detail-contaienr">
+                        <label class="product-img-upload" for="product-img">Media<br><span><p>+</p></span></label>
+                        <input class="product-img-upload" type="file" multiple="multiple" accept="image/*" id="product-img" name="product-title" required=""></input>
+                        <div id="product-img-preview">
+                            <div>
+                                <div class="img-preview-container">
+                                    <span>x</span>
+                                    <img src="../image/landing/bg.JPG">
+                                </div>
+                                <div class="img-preview-container">
+                                    <span>x</span>
+                                    <img src="../image/landing/bg.JPG">
+                                </div>
+                                <div class="img-preview-container">
+                                    <span>x</span>
+                                    <img src="../image/landing/bg.JPG">
+                                </div>
+                                <div class="img-preview-container">
+                                    <span>x</span>
+                                    <img src="../image/landing/bg.JPG">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div id="form-btn-list">
+                    <input type="button" name="back_btn" value="Back"/>
+                    <input type="submit" name="update_btn" value="Update"/>
+                </div>
+            </form>
+        </section>
+	</main>
+	<script src="script.js"></script>
+</body>
+
+</html>

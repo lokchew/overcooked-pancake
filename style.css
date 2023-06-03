@@ -362,17 +362,21 @@ p {
 	overflow: hidden;
 }
 
-.showcase-product > div {
+.showcase-product-img {
 	height: 250px;
-	background-size: 100%;
-	background-position-x: center;
-	background-position-y: center;
-
-	transition: background-size 0.3s ease-out;
+	overflow: hidden;
 }
 
-.showcase-product > div:hover {
-	background-size: 120%;
+.showcase-product-img > div {
+	height: 100%;
+	width: 100%;
+	background-size: cover;
+	background-position: center;
+	transition: transform 0.3s ease;
+}
+
+.showcase-product-img > div:hover {
+	transform: scale(1.2);
 }
 
 .showcase-product > p {
@@ -399,6 +403,12 @@ p {
 
 	font-size: 14px;
 	color: #5F5F5F;
+	
+	transition: border-color 0.3s ease;
+}
+
+.showcase-product > button:hover {
+	border-color: #8a8a8a;
 }
 
 /* End of home section */
@@ -409,6 +419,7 @@ p {
 
 
 footer {
+	margin-top: 70px;
 	background: #2A2A2A;
 	color: #ffffff;
 }
@@ -467,8 +478,8 @@ footer > span {
 	width: 40px;
 
 	background-size: 100%;
-	background-position-x: center;
-	background-position-y: center;
+	background-repeat: no-repeat;
+	background-position: center;
 	transition: height 0.2s ease-out, width 0.2s ease-out ;
 }
 
