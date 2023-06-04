@@ -58,6 +58,12 @@ p {
     color: #ffffff;
 }
 
+
+
+
+
+
+
 #admin-right-panel {
     position: relative;
 }
@@ -178,6 +184,12 @@ p {
     padding-top: 4px;
     font-size: 12px;
     color: #858585;
+}
+
+
+.product-description {
+    height: 1.5em;
+    overflow: hidden;
 }
 
 .product-action {

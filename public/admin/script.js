@@ -8,7 +8,7 @@ async function getProductJson() {
 
 function setProductLst(lst) {
     productLst = lst;
-    console.log(productLst)
+    // console.log(productLst)
 
     updateProductDisplay();
 }
@@ -23,10 +23,12 @@ function updateProductDisplay(filter) {
 
     filter.forEach(type => {
         productLst[type].forEach(product => {
+            var imgFolder = product.type.toLowerCase().replace(" ", "-");
+        
             products += 
             `<div class="admin-product-container" product-type="${product.type}" product-id="${product.id}">
                 <input type="checkbox">
-                <img src="../image/landing/bg.JPG">
+                <img src="../image/product/${imgFolder}/${product.img[0]}" style="background: #707070">
                 <div class="admin-detail-grid">
                     <div>
                         <p class="product-title">${product.name}</p>
@@ -59,12 +61,18 @@ function openProductForm(product) {
     productForm.style.display = "block";
     form.reset();
 
+    productId = Math.round(Date.now() + Math.random());
+    editProductID = -1;
+
     if (product != null) {
         product = product.closest(".admin-product-container");
         var type = product.getAttribute("product-type");
         var id = product.getAttribute("product-id");
         productLst[type].forEach((element, index) => {
             if (id == element.id) {
+                productId = Number(id);
+                editProductID = index;
+
                 document.querySelector('input[name="product-title"]').value = element.name;
                 document.querySelector('input[name="product-type"]').value = element.type;
                 tinymce.activeEditor.selection.setContent(element.description);
@@ -83,13 +91,6 @@ function openProductForm(product) {
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
-
-    // let movieLst = JSON.parse(localStorage.getItem('movieLst')) || [];
-    // movieLst.push(getMovieDetails());
-    // // Sorting the movieLst based on watched date
-    // sortOrder(movieLst, true, 2);
-    // localStorage.setItem('movieLst', JSON.stringify(movieLst));
-    // // console.log(JSON.parse(localStorage.getItem('movieLst')));
     submitProductForm();
     closeProductForm();
 });
@@ -138,16 +139,19 @@ function closeProductForm() {
     productImagesPreview = [];
 }
 
-function submitProductForm(id) {
-    const productId = id || Math.round(Date.now() + Math.random());
+let productId;
+let editProductID = -1;
+function submitProductForm() {
     const productTitle = document.querySelector('input[name="product-title"]').value;
     const productType = document.querySelector('input[name="product-type"]').value;
     const productDescription = tinymce.get("product-description").getContent();
     let productImages = [];
-    
+
     productImagesPreview.forEach(img => {
-        productImages.push(img.name);
+        if (typeof img != "string") productImages.push(img.name);
+        else productImages.push(img.substring(img.lastIndexOf('/') + 1));
     });
+    // console.log(productImages)
 
     // Get the date when user submit the form
     const date = getDate();
@@ -155,7 +159,14 @@ function submitProductForm(id) {
 
     // Save everything into an object
     const product = {id: productId, name: productTitle, type: productType, description: productDescription, img: productImages, date: updatedDate};
-    productLst[productType].push(product);
+
+    if (editProductID > -1) productLst[productType][editProductID] = product;
+    else {
+        try {productLst[productType].push(product);} 
+        catch (e) {productLst[productType] = [(product)];}
+    }
+
+    updateProductDisplay();
 }
 
 // A function to retrieve the date
@@ -180,10 +191,9 @@ function getDate() {
 /* --------------------------------------- Remove product from list ---------------------------------------*/
 function removeSelected() {
     var selected = document.querySelectorAll(".admin-product-container input:checked");
-    selected.forEach(element => {
-        removeProduct(element);
-    });
+    selected.forEach(element => {removeProduct(element);});
     // console.log(productLst);
+
 }
 
 function removeProduct(product) {
@@ -195,6 +205,7 @@ function removeProduct(product) {
     productLst[type].forEach((element, index) => {
         if (id == element.id) {
             productLst[type].splice(index, 1);
+            updateProductDisplay();
             return;
         }
     });
@@ -204,7 +215,7 @@ function removeProduct(product) {
 
 
 
-/* --------------------------------------- Download json file ---------------------------------------*/
+/* --------------------------------------- Update json file ---------------------------------------*/
 // Download json file https://stackoverflow.com/questions/19721439/download-json-object-as-a-file-from-browser
 const saveTemplateAsFile = (filename, dataObjToWrite) => {
     const blob = new Blob([JSON.stringify(dataObjToWrite)], { type: "text/json" });

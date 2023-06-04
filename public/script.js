@@ -1,5 +1,32 @@
-// // Check the users window width and height for testing purpose
-// // confirm(`Window width x height: ${window.innerWidth} x ${window.innerHeight}`);
+getProductJson();
+async function getProductJson() {
+    const response = await fetch('json/products.json');
+    const lst = await response.json(); 
+    displayProducts(lst);
+}
+
+function displayProducts(lst) {
+    var productsContainer = document.querySelectorAll(".showcase-products");
+    productsContainer.forEach(element => {
+        var type = element.parentElement.getAttribute("product").replace("-", " ");
+        var showcaseNum = lst[type].length;
+        if (productsContainer.length > 1 && lst[type].length > 4) showcaseNum = 4;
+        // console.log(showcaseNum)
+
+        var images = "";
+        for (var i = 0; i < showcaseNum; i++) {
+            var product = lst[type][i];
+            images += `
+            <div class="showcase-product">
+                <div class="showcase-product-img"><div style="background-image: url('image/product/clay/apple puppy 1.JPG');"></div></div>
+                <p>The Little Dog who wears rabbit hat</p>
+                <button>View Details</button>
+            </div>
+            `
+        }
+        element.innerHTML = images;
+    });
+}
 
 // // Functions to call when the page finishes loading
 // document.addEventListener('DOMContentLoaded', () => {
