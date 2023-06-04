@@ -1,25 +1,30 @@
-getProductJson();
+
+// Functions to call when the page finishes loading
+document.addEventListener('DOMContentLoaded', () => {
+    getProductJson();
+    createFooter();
+});
+
 async function getProductJson() {
     const response = await fetch('json/products.json');
     const lst = await response.json(); 
-    displayProducts(lst);
-}
 
-function displayProducts(lst) {
     var productsContainer = document.querySelectorAll(".showcase-products");
     productsContainer.forEach(element => {
-        var type = element.parentElement.getAttribute("product").replace("-", " ");
-        var showcaseNum = lst[type].length;
-        if (productsContainer.length > 1 && lst[type].length > 4) showcaseNum = 4;
+        var type = element.parentElement.getAttribute("product");
+        var formattedType = type.replace("-", " ");
+        var showcaseNum = lst[formattedType].length;
+        if (productsContainer.length > 1 && lst[formattedType].length > 4) showcaseNum = 4;
         // console.log(showcaseNum)
 
         var images = "";
         for (var i = 0; i < showcaseNum; i++) {
-            var product = lst[type][i];
+            var product = lst[formattedType][i];
             images += `
             <div class="showcase-product">
-                <div class="showcase-product-img"><div style="background-image: url('image/product/clay/apple puppy 1.JPG');"></div></div>
-                <p>The Little Dog who wears rabbit hat</p>
+                <div class="showcase-product-img"><div style="background-image: url('image/product/${type}/${product.img[0]}');">
+                </div></div>
+                <p>${product.name}</p>
                 <button>View Details</button>
             </div>
             `
@@ -28,16 +33,31 @@ function displayProducts(lst) {
     });
 }
 
-// // Functions to call when the page finishes loading
-// document.addEventListener('DOMContentLoaded', () => {
-//     navbarAnimation();
+function createFooter() {
+    var footer = document.createElement("footer");
+    footer.innerHTML = `
+    <div id="footer-contact">
+        <div>
+            <p class="contact-header">Contact email:</p>
+            <p>everydayistremendous@gmail.com</p>
+        </div>
+        <div>
+            <p class="contact-header">Working hours:</p>
+            <p>MON - SUN 1pm to 9pm</p>
+        </div>
+    </div>
+    <span></span>
+    <div id="footer-connect">
+        <p>FOLLOW US</p>
+        <div id="connect-platforms">
+            <a style="background-image: url('image/footer/instagram.png');" href=""></a>
+        </div>
+        <p style="font-size: 12px;">© 2023, I You We They</p>
+    </div>
+    `
+    document.querySelector("body").appendChild(footer);
+}
 
-//     setColorScale();
-//     generateColorbar(mpwDivision, mpwColorbar, chart1_colorbar);
-//     generateColorbar(seafoodDivision, seafoodColorbar, chart2_colorbar);
-
-//     contentUpdate();
-// });
 
 // // Ensure the plots are correctly built even when the users have resized their screen
 // window.addEventListener('resize', contentUpdate, true);

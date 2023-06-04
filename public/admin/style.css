@@ -120,7 +120,8 @@ p {
 
 #admin-products-header {
     margin-right: 0.5vw;
-
+    font-size: 14px;
+    color: #353535;
 }
 
 #admin-products-container {
