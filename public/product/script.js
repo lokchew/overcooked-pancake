@@ -37,7 +37,20 @@ async function getProductJson() {
 
 function createProductPage(product) {
     // Create a new HTML page dynamically
-    window.open(`product/${product}.html`);
+    window.open(`product/template.html`);
+
+    // // Create a new webpage
+    // const newWebpage = document.createElement('html');
+
+    // newWebpage.innerHTML = ``;
+
+    // // Convert the modified template to a string
+    // const webpageString = new XMLSerializer().serializeToString(newWebpage);
+
+    // const newWindow = window.open("product.html");
+    // newWindow.document.open();
+    // newWindow.document.write(webpageString);
+    // newWindow.document.close();
 }
 
 function createFooter() {

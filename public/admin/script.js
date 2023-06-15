@@ -1,4 +1,5 @@
-let productLst = getProductJson();
+let productLst;
+getProductJson();
 
 async function getProductJson() {
     const response = await fetch('../json/products.json');
@@ -13,13 +14,15 @@ function setProductLst(lst) {
     updateProductDisplay();
 }
 
-function updateProductDisplay(filter) {
+let filter;
+function updateProductDisplay() {
     const container = document.getElementById("admin-products-container");
     var products = "";
 
     // Ensure the filter is a list
-    filter = [filter];
-    if (filter[0] == null) filter = Object.keys(productLst);
+    if (filter == null) filter = Object.keys(productLst);
+    else filter = [filter];
+    // console.log(filter);
 
     filter.forEach(type => {
         productLst[type].forEach(product => {
@@ -47,6 +50,47 @@ function updateProductDisplay(filter) {
     })
 
     container.innerHTML = products;
+
+    countProductNum();
+}
+
+
+
+
+/* --------------------------------------- Left panel ---------------------------------------*/
+const productCategory = document.querySelectorAll(".product-category-container");
+productCategory.forEach((element, index) => {
+    element.addEventListener("click", () => {
+        filterProduct(index);
+    })
+})
+
+function filterProduct(type) {
+    productCategory.forEach((element, index) => {
+        if (index == type) element.classList.add("active");
+        else element.classList.remove("active");
+    })
+
+    if (type > 0) filter = Object.keys(productLst)[type - 1];
+    else filter = null;
+    updateProductDisplay(filter)
+}
+
+function countProductNum() {
+    var total = 0;
+    var categoryNum = [0];
+    Object.keys(productLst).forEach(type => {
+        categoryNum.push(productLst[type].length);
+    })
+
+    const productCategoryNum = document.querySelectorAll(".product-category-num");
+    productCategoryNum.forEach((element, index) => {
+        var num = categoryNum[index];
+        element.textContent = `(${num})`;
+        total += num;
+    });
+
+    productCategoryNum[0].textContent = `(${total})`;
 }
 
 
