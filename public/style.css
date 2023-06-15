@@ -355,7 +355,7 @@ p {
 .showcase-product {
 	position: relative;
 	width: 290px;
-	height: 450px;
+	height: 420px;
 
 	border: 2px solid #eeeeee;
 	border-radius: 10px;
@@ -391,7 +391,7 @@ p {
 .showcase-product > button {
 	position: absolute;
     width: 85%;
-    height: 3.5em;
+    height: 3em;
 	
 	background: none;
 	border: 2px solid #d5d5d5;
